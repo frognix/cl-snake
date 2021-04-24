@@ -1,6 +1,16 @@
+(defpackage :snake
+  (:use :cl :sketch :sketch-misc)
+  (:export start-snake +default-field+))
 (in-package :snake)
 
-(defparameter *default-font* nil)
+(defconstant +window-width+ 756)
+(defconstant +window-height+ 756)
+(defconstant +cell-count+ 15)
+(defconstant +cell-size+ (/ +window-width+ +cell-count+))
+
+(defparameter *current-screen* nil)
+(defparameter *window* nil)
+
 (defparameter *selected-font* nil)
 (defparameter *header-font* nil)
 
@@ -13,7 +23,8 @@
         (set-font *default-font*)
         (setf *initialization-stage* nil))
     (background +white+)
-    (draw-object *current-screen*))
+    (let ((*window-width* +window-width+) (*window-height* +window-height+))
+        (draw-object *current-screen*)))
 
 (defun close-window ()
     (sdl2.kit:close-window *window*))
