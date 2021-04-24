@@ -7,6 +7,7 @@
 
 (defun set-screen (key)
     (when (eq *current-screen* (getf *screens* :game))
+        (setf *field* nil)
         (destroy-snake-thread *current-screen*)
         (setf (getf *screens* :game) (create-default-field)))
     (setf *current-screen*
@@ -20,4 +21,5 @@
 
 (defun start-snake ()
     (set-screen :menu)
-    (setf *window* (make-instance 'snake-window)))
+    (setf *window* (make-instance 'snake-window))
+    (sdl2:make-this-thread-main))

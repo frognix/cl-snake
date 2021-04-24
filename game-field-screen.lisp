@@ -122,9 +122,13 @@
         (setf (direction (snake *field*)) dir)))
 
 (defmethod catch-key ((obj game-field-screen) key)
-    (set-direction (case key
-                     (:scancode-a :left)
-                     (:scancode-d :right)
-                     (:scancode-w :up)
-                     (:scancode-s :down)
-                     (:scancode-q (close-window)))))
+    (block set
+        (set-direction (case key
+                         (:scancode-a :left)
+                         (:scancode-d :right)
+                         (:scancode-w :up)
+                         (:scancode-s :down)
+                         (:scancode-q
+                          (bordeaux-threads:destroy-thread (snake-thread *field*))
+                          (set-screen :menu)
+                          (return-from set))))))

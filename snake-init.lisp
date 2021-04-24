@@ -27,7 +27,8 @@
         (draw-object *current-screen*)))
 
 (defun close-window ()
-    (sdl2.kit:close-window *window*))
+    (sdl2.kit:close-window *window*)
+    (cl-user::quit))
 
 (defmethod kit.sdl2:keyboard-event ((window snake-window) state
                                     timestamp repeat-p keysym)
