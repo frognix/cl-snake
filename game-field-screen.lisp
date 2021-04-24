@@ -5,7 +5,7 @@
 
 (defclass food (cell) ())
 
-(defclass game-field ()
+(defclass game-field-screen ()
   ((height
     :initarg :height
     :accessor height)
@@ -24,7 +24,7 @@
     :accessor food)))
 
 (defun create-default-field ()
-    (make-instance 'game-field
+    (make-instance 'game-field-screen
                    :width +cell-count+
                    :height +cell-count+
                    :snake (make-instance 'snake :body (list (snake-cell 1 1) (snake-cell 2 1) (snake-cell 3 1))
@@ -70,7 +70,7 @@
         (setf (body snake) (cons (snake-cell-from-cell food-cell) (body snake)))))
 
 (defmethod collide ((snake-cell snake-cell) (another-snake snake-cell))
-    (game-over)
+    (game-over-screen)
     (funcall *break-snake-loop*))
 
 (defmethod collide ((snake-cell snake-cell) (cell cell))
@@ -110,7 +110,7 @@
             (line 0 (* step i) width (* step i))
             (line (* step i) 0 (* step i) height))))
 
-(defmethod draw-object ((obj game-field))
+(defmethod draw-object ((obj game-field-screen))
     (with-slots (height width snake food) obj
         (loop for f in food do (draw-object f))
         (draw-object snake)
@@ -121,7 +121,7 @@
                 (not dir))
         (setf (direction (snake *field*)) dir)))
 
-(defmethod catch-key ((obj game-field) key)
+(defmethod catch-key ((obj game-field-screen) key)
     (set-direction (case key
                      (:scancode-a :left)
                      (:scancode-d :right)

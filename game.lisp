@@ -1,9 +1,9 @@
 (in-package :snake)
 
 (defparameter *screens* (list
-                         :menu (make-instance 'game-menu)
+                         :menu (make-instance 'game-menu-screen)
                          :game (create-default-field)
-                         :game-over (make-instance 'game-over)))
+                         :game-over (make-instance 'game-over-screen)))
 
 (defun set-screen (key)
     (when (eq *current-screen* (getf *screens* :game))
