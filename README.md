@@ -2,10 +2,18 @@
 
 A simple Snake game implemented in Common Lisp
 
-## Dependencies
+## Requirements
+
+### For Snake
 
 - sbcl
 - quicklisp
+
+### For Sketch
+
+- SDL2
+- SDL2 image & SDL2 ttf
+- libffi
 
 ## Build
 
