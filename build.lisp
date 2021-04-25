@@ -1,4 +1,5 @@
 (in-package :cl-user)
+
 (load "/usr/lib/quicklisp/setup")
 
 (pushnew '*default-pathname-defaults* asdf:*central-registry*)
@@ -22,6 +23,8 @@
     `(sb-ext:save-lisp-and-die ,(executable-name)
                                :toplevel #'snake:start-snake
                                :executable t
+                               :purify t
+                               :compression t
                                ,@(additional-args)))
 
 (save-executable)
